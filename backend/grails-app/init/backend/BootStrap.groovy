@@ -9,10 +9,11 @@ import java.time.temporal.ChronoUnit
 
 class BootStrap {
 
+//    Check Trade Time
     LocalTime startTradeTime = LocalTime.of(18,00,00)
     LocalTime endTradeTime = LocalTime.of(19,00,00)
 
-    long horas = ChronoUnit.MINUTES.between(startTradeTime,endTradeTime)
+    long tradeTime = ChronoUnit.MINUTES.between(startTradeTime,endTradeTime)
 
     Stock initialPrice = new Stock(
             price: 1.12d,
@@ -30,25 +31,14 @@ class BootStrap {
         def gol = new Company(
                 name: 'GOL',
                 segment: Segments.AIRLINES,
+                stocks: this.initialPrice
         ).save(failOnError: true)
 
         def petrobras = new Company(
                 name: 'PETROBRAS',
                 segment: Segments.OIL,
+                stocks: this.initialPrice
         ).save(failOnError: true)
-
-//        def timer = new Timer()
-//        def task = timer.runAfter(5000){
-//            def currentQuota = petrobras.getPrice()
-//            println currentQuota + quotePetrobras
-//            petrobras.setPrice(currentQuota + quotePetrobras)
-//        }
-//
-//        while (horas){
-//            def timer = new Timer()
-//            def task = timer.runAfter(60000){
-//                println("FON")
-//        }
 
     }
     def destroy = {
