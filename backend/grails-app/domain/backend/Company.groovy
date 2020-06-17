@@ -4,7 +4,6 @@ import grails.rest.Resource
 import groovy.transform.ToString
 
 @ToString
-@Resource(uri='/companies')
 class Company {
 
     String name

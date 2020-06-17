@@ -5,7 +5,6 @@ import groovy.transform.ToString
 
 import java.time.LocalDateTime
 
-@ToString
 @Resource(uri='/stocks')
 class Stock {
 
@@ -17,5 +16,10 @@ class Stock {
     static constraints = {
         price blank: false, nullable: false
         datePrice blank: false, nullable: false
+    }
+
+    String toString(){
+        price
+        datePrice
     }
 }
