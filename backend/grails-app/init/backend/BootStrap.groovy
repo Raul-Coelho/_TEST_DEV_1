@@ -19,20 +19,6 @@ class BootStrap {
     CompanyController companyController
     CompanyService service = new CompanyService()
 
-    def saveCompanies(Company company){
-        company = new Company(
-                name: company.name,
-                segment: company.segment
-        )
-        for (int i; i<3; i++){
-            Double newPrice = initialQuota.getPrice() + 0.10d
-            company.addToStocks(new Stock(price: newPrice,datePrice: LocalDateTime.now()))
-            initialQuota.setPrice(newPrice)
-        }
-        println(company)
-        return company.save()
-    }
-
     def init = { servletContext ->
 
         service.save(new Company(
