@@ -1,8 +1,10 @@
 package backend
 
+import grails.rest.Resource
 import groovy.transform.ToString
 
 @ToString
+@Resource(uri='/companies')
 class Company {
 
     String name
@@ -13,6 +15,5 @@ class Company {
     static constraints = {
         name blank: false
         segment inList: ['AIRLINES', 'VEHICLES', 'OIL']
-        stocks blank:true, nullable: true
     }
 }

@@ -15,30 +15,30 @@ class BootStrap {
 
     long tradeTime = ChronoUnit.MINUTES.between(startTradeTime,endTradeTime)
 
-    Stock initialPrice = new Stock(
-            price: 1.12d,
-            datePrice: LocalDateTime.now()
-    )
-
     def init = { servletContext ->
 
-        def ford = new Company(
+        Stock stock = new Stock(price: 1.12d,datePrice: LocalDateTime.now())
+        Stock stock2 = new Stock(price: 1.12d,datePrice: LocalDateTime.now())
+
+
+        Company ford = new Company(
                 name: 'FORD',
                 segment: Segments.VEHICLES,
-                stocks: this.initialPrice
-        ).save(failOnError: true)
+                stocks: [stock,stock2]
+        )
+        ford.save(failOnError: true)
 
-        def gol = new Company(
-                name: 'GOL',
-                segment: Segments.AIRLINES,
-                stocks: this.initialPrice
-        ).save(failOnError: true)
-
-        def petrobras = new Company(
-                name: 'PETROBRAS',
-                segment: Segments.OIL,
-                stocks: this.initialPrice
-        ).save(failOnError: true)
+//        def gol = new Company(
+//                name: 'GOL',
+//                segment: Segments.AIRLINES,
+//                stocks: this.initialPrice
+//        ).save(failOnError: true)
+//
+//        def petrobras = new Company(
+//                name: 'PETROBRAS',
+//                segment: Segments.OIL,
+//                stocks: this.initialPrice
+//        ).save(failOnError: true)
 
     }
     def destroy = {
