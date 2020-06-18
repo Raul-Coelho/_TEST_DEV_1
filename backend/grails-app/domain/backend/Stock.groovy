@@ -11,6 +11,11 @@ class Stock {
     Double price
     LocalDateTime datePrice
 
+    Stock(Double price, LocalDateTime datePrice){
+        this.price = price
+        this.datePrice = datePrice
+    }
+
     static belongsTo = [company: Company]
 
     static constraints = {
@@ -18,8 +23,4 @@ class Stock {
         datePrice blank: false, nullable: false
     }
 
-    String toString(){
-        price
-        datePrice
-    }
 }
