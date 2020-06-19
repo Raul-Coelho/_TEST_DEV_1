@@ -11,11 +11,11 @@ class CompanyController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
+    def show() {
         respond companyService.list()
     }
 
-    def show(Long id){
+    def read(Long id){
         respond companyService.get(id)
     }
 
