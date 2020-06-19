@@ -16,6 +16,13 @@ class BootStrap {
     long tradeTime = ChronoUnit.SECONDS.between(startTradeTime,endTradeTime)
 
     CompanyService service = new CompanyService()
+//    StockService stockService = new StockService()
+
+    def statistics(){
+        def ford = service.get(1)
+        def statisticFinal = service.getStocks(ford)
+        return statisticFinal
+    }
 
     def init = { servletContext ->
 
@@ -34,20 +41,30 @@ class BootStrap {
                 segment: Segments.OIL,
         ))
 
+
         ScheduledFuture<?> f = Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
+
             @Override
             void run() {
                 if (startTradeTime != endTradeTime){
                     service.update()
-                    println(LocalTime.now())
-                    setStartTradeTime(startTradeTime.plusHours(1))
+
+                    println("Updating Stock Quotes: "+LocalTime.now())
+
+                    setStartTradeTime(startTradeTime.plusHours(8))
+
                     println(startTradeTime)
+
                 }else{
-                    println("FORA DO HORARIO COMERCIAL")
+                    println("TradeTime CLOSED!, open at 10AM netxt day")
+                    println("-----------------------------------------")
+                    statistics()
                 }
             }
+
         }, 2, 60000, TimeUnit.MILLISECONDS)
-        Thread.sleep(10000)
+        Thread.sleep(5000)
+
     }
 
     def destroy = {
