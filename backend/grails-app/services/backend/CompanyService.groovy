@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 @Transactional
 class CompanyService {
 
+    StockService stockService = new StockService()
     static scope = "session"
     Double initialPrice = 1.00d
 
@@ -23,6 +24,30 @@ class CompanyService {
         return read
     }
 
+    def getStocks(Company company){
+        def comp = get(company.getId())
+        def stocks = comp.getStocks()
+
+        println(
+            "COMPANY:\n"+
+            "   Name : "+ comp.name+"\n"+
+            "   Segment: "+ comp.segment+"\n"
+
+        )
+        println(
+                " NUMBER OF STOCK QUOTES: "+stocks.size()
+        )
+        println(
+                " STOCK QUOTE: \n"
+        )
+        for (int i = 0; i < stocks.size() ; i++) {
+            println(
+                "   Price: "+stocks[i].price+"\n"+
+                "   Date: "+stocks[i].datePrice+"\n"
+                    )
+        }
+    }
+
     def update(){
         def listCompanies = list()
         for (int i = 0; i < listCompanies.size(); i++) {
@@ -33,7 +58,6 @@ class CompanyService {
         if (this.initialPrice.equals(2.00)){
             this.initialPrice = 1.00d
         }
-        println("Updating Stock Quotes")
     }
 
     def save(Company company){
