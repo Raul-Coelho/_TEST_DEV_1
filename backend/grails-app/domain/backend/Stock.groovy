@@ -16,11 +16,17 @@ class Stock {
         this.datePrice = datePrice
     }
 
+    static hasOne = [company: Company]
     static belongsTo = [company: Company]
 
     static constraints = {
         price blank: false, nullable: false
         datePrice blank: false, nullable: false
+    }
+
+    String toString(){
+        price
+        datePrice
     }
 
 }

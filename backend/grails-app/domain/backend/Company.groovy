@@ -2,6 +2,7 @@ package backend
 
 import groovy.transform.ToString
 
+@ToString
 class Company{
 
     String name
