@@ -1,0 +1,51 @@
+<mat-toolbar color="primary" style="box-shadow: inset;">
+    <span>
+        Stock Quotes
+    </span>
+</mat-toolbar>
+
+
+
+<mat-grid-list cols="1" rowHeight="6:1">
+    <mat-grid-tile>
+        <button (click)="getCompanies()" mat-raised-button style="width: 15rem; height: 5rem;" color="primary">
+            GET COMPANIES
+        </button>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-grid-list cols="2" rowHeight="5:2" *ngFor="let item of companies">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-header>
+                <h3>
+                    {{item.name}}
+                </h3>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list role="list">
+                    <mat-list-item role="listitem">
+                        Segment: {{item.segment}}
+                    </mat-list-item>
+                    <mat-list-item role="listitem">
+                        Standard Desviation: {{getStandardDesviation(item.stocks)}}
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>
+            <div>
+                <div style="display: block; width: 40rem;">
+                    <canvas baseChart [datasets]="getChartDataset(item.name,item.stocks)"
+                        [labels]="getChartLabel(item.stocks)" [colors]="lineChartColors" [options]="barChartOptions"
+                        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </mat-grid-tile>
+
+</mat-grid-list>
