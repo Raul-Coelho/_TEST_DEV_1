@@ -1,17 +1,17 @@
 package backend
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import grails.rest.Resource
-import groovy.transform.ToString
-
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @Resource(uri='/stocks')
 class Stock {
 
     Double price
-    LocalDateTime datePrice
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    LocalDate datePrice
 
-    Stock(Double price, LocalDateTime datePrice){
+    Stock(Double price, LocalDate datePrice){
         this.price = price
         this.datePrice = datePrice
     }

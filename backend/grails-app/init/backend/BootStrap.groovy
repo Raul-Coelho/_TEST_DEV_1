@@ -16,7 +16,6 @@ class BootStrap {
     long tradeTime = ChronoUnit.SECONDS.between(startTradeTime,endTradeTime)
 
     CompanyService service = new CompanyService()
-//    StockService stockService = new StockService()
 
     def statistics(){
         def ford = service.get(1)
@@ -51,7 +50,7 @@ class BootStrap {
 
                     println("Updating Stock Quotes: "+LocalTime.now())
 
-                    setStartTradeTime(startTradeTime.plusHours(8))
+                    setStartTradeTime(startTradeTime.plusMinutes(1))
 
                     println(startTradeTime)
 

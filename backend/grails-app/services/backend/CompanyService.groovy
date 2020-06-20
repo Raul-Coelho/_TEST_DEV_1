@@ -1,14 +1,16 @@
 package backend
 
 import grails.gorm.transactions.Transactional
+
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Transactional
 class CompanyService {
 
     StockService stockService = new StockService()
     static scope = "session"
-    Double initialPrice = 1.00d
 
     def count(){
         Company.count()
@@ -49,24 +51,21 @@ class CompanyService {
     }
 
     def update(){
+        Double price = new Random().nextDouble() * 20
         def listCompanies = list()
         for (int i = 0; i < listCompanies.size(); i++) {
-            listCompanies[i].addToStocks(new Stock(price: this.initialPrice, datePrice: LocalDateTime.now()))
+            listCompanies[i].addToStocks(new Stock(price: price, datePrice: LocalDate.now()))
             listCompanies[i].save()
-        }
-        this.initialPrice += 0.02
-        if (this.initialPrice.equals(2.00)){
-            this.initialPrice = 1.00d
         }
     }
 
     def save(Company company){
-        Double price = 1.00
+        Double price = new Random().nextDouble() * 20
         company = new Company(
                 name: company.name,
                 segment: company.segment
         )
-        company.addToStocks(new Stock(price: price + 0.10d, datePrice: LocalDateTime.now()))
+        company.addToStocks(new Stock(price: price, datePrice: LocalDateTime.now()))
         company.save()
     }
 
